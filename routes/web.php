@@ -15,17 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('hola-mundo', function () {
-    return '<h1>¡Hola Mundo!</h1> Soy tu padre.';
+Route::get('/hola-mundo', function () {
+    return view('hola-mundo');
 });
 
-Route::get('contacto/{nombre?}/{edad?}', function ($nombre = "Pepito", $edad = 30) {
+Route::get('/contacto/{nombre?}/{edad?}', function ($nombre = "Tito", $edad = null) {
     /*return view('contacto', array(
         "nombre" => $nombre,
         "edad" => $edad
     ));*/
-    return view('contacto')->with('nombre', $nombre)
-                           ->with('edad', $edad);
+    return view('contacto.contacto')
+                ->with('nombre', $nombre)
+                ->with('edad', $edad)
+                ->with('frutas', array('naranja', 'pera', 'sandía', 'fresa', 'melón', 'piña'));
 })->where(([
     'nombre' => '[A-Za-z]+',
     'edad' => '[0-9]+'
